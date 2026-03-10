@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#0D1A3A">
+<meta name="description" content="Find out how much you could earn answering surveys — free, no card required. Canadian residents 18+.">
+<title>Canada Earn Calculator — How Much Can You Make?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800;12..96,900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#DDE4EC;--card:#EEF2F7;--blue:#1A5CFF;--blue-dk:#1240CC;
+  --navy:#0D1A3A;--body:#3A4560;--muted:#7A8BA8;
+  --white:#fff;--black:#0A0B0F;--lime:#C8FF00;
+  --r:100px;--cr:20px;--t:all .22s cubic-bezier(.4,0,.2,1);
+  --sab:env(safe-area-inset-bottom,0px);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;background:var(--bg);
+  min-height:100dvh;overflow-x:hidden;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+}
+/* PELLETS */
+.p{display:inline-flex;align-items:center;justify-content:center;gap:5px;height:26px;padding:0 10px;border-radius:var(--r);font-size:10.5px;font-weight:700;letter-spacing:.3px;white-space:nowrap;flex-shrink:0;font-family:'DM Sans',sans-serif}
+.p svg{width:12px;height:12px;flex-shrink:0}
+.pb{background:var(--blue);color:var(--white)}
+.pn{background:var(--navy);color:var(--white)}
+.pl{background:var(--lime);color:var(--black)}
+.pw{background:var(--white);color:var(--navy);border:1.5px solid rgba(0,0,0,.1)}
+.pg{background:rgba(26,92,255,.1);color:var(--blue)}
+/* TOPBAR */
+.topbar{
+  background:var(--white);border-bottom:1px solid rgba(0,0,0,.07);
+  padding:11px 16px;padding-top:calc(11px + env(safe-area-inset-top,0px));
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:200;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.logo{display:flex;align-items:center;gap:9px}
+.logo-mark{width:32px;height:32px;background:var(--navy);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-mark svg{width:17px;height:17px}
+.logo-name{font-family:'Bricolage Grotesque',sans-serif;font-size:13px;font-weight:800;color:var(--navy)}
+.logo-sub{font-size:9px;font-weight:500;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+.topbar-r{display:flex;gap:6px;align-items:center}
+/* URGENCY BAR */
+.urg{background:linear-gradient(135deg,#1A5CFF,#1240CC);padding:9px 16px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;font-weight:600;color:rgba(255,255,255,.9);text-align:center}
+.urg strong{color:var(--lime);font-weight:800}
+.udot{width:6px;height:6px;border-radius:50%;background:var(--lime);animation:pulse 2s ease infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
+/* TICKER */
+.ticker{background:var(--navy);padding:8px 0;overflow:hidden}
+.ticker-i{display:flex;animation:tick 22s linear infinite;width:max-content}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ti{display:flex;align-items:center;gap:8px;padding:0 20px;font-size:11px;font-weight:600;color:rgba(255,255,255,.65);white-space:nowrap}
+.ti .p{height:20px;padding:0 8px;font-size:9px}
+.tsep{color:rgba(255,255,255,.2)}
+/* HERO */
+.hero{max-width:520px;margin:16px auto 0;padding:0 12px}
+.hero-card{
+  background:var(--card);border-radius:var(--cr);padding:28px 24px 22px;
+  position:relative;overflow:hidden;
+  box-shadow:0 2px 0 rgba(255,255,255,.8) inset,0 8px 32px rgba(13,26,58,.1);
+  border:1px solid rgba(255,255,255,.6);
+  animation:fadeUp .5s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.nbadge{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--navy);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-size:13px;font-weight:800;color:var(--navy);margin:0 auto 14px}
+.hero-eye{display:flex;justify-content:center;margin-bottom:14px}
+.hero-title{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(24px,6.5vw,36px);font-weight:900;color:var(--navy);text-align:center;line-height:1.1;letter-spacing:-.5px;margin-bottom:6px}
+.hl{background:var(--blue);color:var(--white);border-radius:6px;padding:1px 10px;display:inline}
+.hero-desc{font-size:13px;color:var(--muted);text-align:center;margin-bottom:18px;line-height:1.6}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.stat{background:var(--white);border-radius:10px;padding:12px 8px;text-align:center;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 8px rgba(13,26,58,.05)}
+.stat-n{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:900;color:var(--navy);line-height:1}
+.stat-l{font-size:9px;color:var(--muted);margin-top:3px;font-weight:500}
+.soc{display:flex;align-items:center;justify-content:center;gap:7px;font-size:11px;color:var(--muted);margin-bottom:18px}
+.savs{display:flex}
+.sav{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--white);margin-left:-6px;background:var(--navy);font-size:8px;font-weight:800;color:var(--lime);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;flex-shrink:0}
+.sav:first-child{margin-left:0}
+.btn-start{
+  width:100%;padding:17px 28px;background:var(--blue);color:var(--white);
+  border:none;border-radius:var(--r);font-family:'Bricolage Grotesque',sans-serif;
+  font-size:17px;font-weight:900;cursor:pointer;transition:var(--t);
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  box-shadow:0 4px 20px rgba(26,92,255,.35);min-height:56px;
+  animation:ctaPulse 2.5s ease infinite;
+}
+@keyframes ctaPulse{0%,100%{box-shadow:0 4px 20px rgba(26,92,255,.35)}50%{box-shadow:0 4px 32px rgba(26,92,255,.6)}}
+.btn-start:active{background:var(--blue-dk);transform:scale(.98)}
+.hero-fine{font-size:11px;color:var(--muted);text-align:center;margin-top:9px}
+/* PROGRESS */
+.pzone{max-width:520px;margin:14px auto 0;padding:0 12px;display:flex;align-items:center;gap:10px}
+.plbl{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap}
+.ptrack{flex:1;height:6px;background:rgba(26,92,255,.12);border-radius:100px;overflow:hidden}
+.pfill{height:100%;background:var(--blue);border-radius:100px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.pstep{font-size:11px;font-weight:700;color:var(--blue);white-space:nowrap}
+/* QUIZ CARD */
+.qouter{max-width:520px;margin:12px auto 0;padding:0 12px 80px}
+.qcard{background:var(--card);border-radius:var(--cr);overflow:hidden;border:1px solid rgba(255,255,255,.7);box-shadow:0 2px 0 rgba(255,255,255,.8) inset,0 8px 40px rgba(13,26,58,.1)}
+.screen{display:none}
+.screen.on{display:block;animation:sIn .25s cubic-bezier(.4,0,.2,1)}
+@keyframes sIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+/* Q HEADER */
+.qh{padding:22px 22px 14px}
+.qh-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.qtag{background:var(--blue);color:var(--white);border-radius:var(--r);padding:3px 12px;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
+.qtit{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(17px,4.5vw,22px);font-weight:900;color:var(--navy);line-height:1.2;margin-bottom:5px}
+.qsub{font-size:12px;color:var(--muted);line-height:1.6}
+/* OPTIONS */
+.olist{padding:0 22px 6px;display:flex;flex-direction:column;gap:8px}
+.opt{
+  display:flex;align-items:center;gap:12px;padding:14px 16px;
+  background:var(--white);border-radius:12px;border:1.5px solid rgba(0,0,0,.06);
+  cursor:pointer;width:100%;text-align:left;font-family:'DM Sans',sans-serif;
+  transition:var(--t);box-shadow:0 1px 4px rgba(13,26,58,.05);min-height:56px;
+}
+.opt:active{border-color:var(--blue);background:rgba(26,92,255,.04)}
+.opt.sel{background:var(--blue);border-color:var(--blue)}
+.opt.sel .ol{color:var(--white)}.opt.sel .od{color:rgba(255,255,255,.7)}
+.opt.sel .opp{background:rgba(255,255,255,.2)}
+.opp{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;background:var(--bg);transition:var(--t)}
+.opp svg{width:16px;height:16px}
+.ol{font-size:14px;font-weight:700;color:var(--navy);display:block}
+.od{font-size:11px;color:var(--muted);margin-top:2px}
+.ochk{margin-left:auto;width:22px;height:22px;border-radius:50%;border:1.5px solid rgba(0,0,0,.15);background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;transition:var(--t)}
+.opt.sel .ochk{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.4);color:var(--white)}
+.opt.sel .ochk::after{content:'✓'}
+/* GRID OPTIONS */
+.ogrid{padding:0 22px 6px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.og{
+  display:flex;flex-direction:column;align-items:flex-start;gap:7px;
+  padding:14px 14px 12px;background:var(--white);border-radius:14px;
+  border:1.5px solid rgba(0,0,0,.06);cursor:pointer;text-align:left;
+  font-family:'DM Sans',sans-serif;box-shadow:0 1px 4px rgba(13,26,58,.05);
+  transition:var(--t);min-height:80px;
+}
+.og:active{border-color:var(--blue)}
+.og.sel{background:var(--blue);border-color:var(--blue)}
+.og.sel .ogl{color:var(--white)}.og.sel .ogs{color:rgba(255,255,255,.65)}.og.sel .ogi{background:rgba(255,255,255,.2)}
+.ogi{width:34px;height:34px;border-radius:8px;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:var(--t);flex-shrink:0}
+.ogi svg{width:17px;height:17px}
+.ogl{font-size:13px;font-weight:700;color:var(--navy);line-height:1.3}
+.ogs{font-size:10px;color:var(--muted);margin-top:1px}
+/* ACTIONS */
+.qa{padding:14px 22px 20px;display:flex;flex-direction:column;gap:8px}
+.btn-next{
+  width:100%;padding:15px 28px;background:var(--blue);color:var(--white);
+  border:none;border-radius:var(--r);font-family:'Bricolage Grotesque',sans-serif;
+  font-size:16px;font-weight:800;cursor:pointer;transition:var(--t);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  min-height:52px;box-shadow:0 4px 16px rgba(26,92,255,.25);
+}
+.btn-next:active:not(:disabled){background:var(--blue-dk);transform:scale(.98)}
+.btn-next:disabled{background:#C2CCDA;cursor:not-allowed;box-shadow:none}
+.btn-back{
+  width:100%;padding:12px;border:1.5px solid rgba(0,0,0,.1);
+  border-radius:var(--r);background:transparent;color:var(--body);
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;
+  cursor:pointer;transition:var(--t);min-height:44px;
+}
+.btn-back:active{background:rgba(0,0,0,.05)}
+.cdiv{height:1px;background:rgba(0,0,0,.07);margin:0 22px}
+/* LOADING */
+.lscr{display:none}.lscr.on{display:block}
+.lwrap{padding:32px 22px 28px}
+.ltit{font-family:'Bricolage Grotesque',sans-serif;font-size:21px;font-weight:900;color:var(--navy);text-align:center;margin-bottom:4px}
+.ltit .hl{background:var(--blue);color:var(--white);border-radius:5px;padding:0 8px}
+.lsub{font-size:12px;color:var(--muted);text-align:center;margin-bottom:22px}
+.lbw{background:rgba(26,92,255,.1);border-radius:100px;height:8px;margin-bottom:6px;overflow:hidden}
+.lb{height:100%;background:linear-gradient(90deg,var(--blue),#5C8FFF);border-radius:100px;width:0%;transition:width 3.4s linear}
+.lpct{font-size:12px;color:var(--blue);font-weight:700;text-align:right;margin-bottom:18px}
+.lsteps{display:flex;flex-direction:column;gap:8px}
+.lsrow{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--white);border-radius:12px;border:1px solid rgba(0,0,0,.06)}
+.lsico{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--bg);flex-shrink:0}
+.lsico svg{width:15px;height:15px}
+.lstxt{font-size:12px;font-weight:600;color:var(--body);flex:1}
+.lschk{width:22px;height:22px;border-radius:50%;border:1.5px solid rgba(0,0,0,.12);background:transparent;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;transition:all .3s}
+.lschk.done{background:var(--blue);border-color:var(--blue);color:var(--white)}
+/* RESULT */
+.rscr{display:none}.rscr.on{display:block;animation:sIn .35s cubic-bezier(.4,0,.2,1)}
+.rhead{background:var(--navy);padding:28px 22px 24px;text-align:center;position:relative;overflow:hidden}
+.rhead::after{content:'';position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);width:200px;height:80px;border-radius:50%;background:rgba(26,92,255,.25)}
+.reye{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:10px;font-weight:700}
+.rtier{display:inline-block;background:var(--blue);color:var(--white);border-radius:var(--r);padding:6px 22px;margin-bottom:18px;font-family:'Bricolage Grotesque',sans-serif;font-size:19px;font-weight:900}
+.rerow{display:flex;gap:10px;justify-content:center}
+.ec{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px 16px;flex:1;max-width:140px}
+.ecl{font-size:9px;color:rgba(255,255,255,.4);margin-bottom:4px;font-weight:700;letter-spacing:.5px}
+.ecv{font-family:'Bricolage Grotesque',sans-serif;font-size:34px;font-weight:900;color:var(--white);line-height:1}
+.ecv sup{font-size:14px;color:rgba(200,255,0,.9);vertical-align:super}
+.ecs{font-size:9px;color:rgba(255,255,255,.3);margin-top:4px}
+.rstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:16px 22px 0}
+.rst{background:var(--white);border-radius:11px;padding:12px 8px;text-align:center;border:1px solid rgba(0,0,0,.05);box-shadow:0 1px 4px rgba(13,26,58,.06)}
+.rstn{font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:900;color:var(--blue)}
+.rstl{font-size:9px;color:var(--muted);margin-top:2px;font-weight:500}
+.rperks{padding:12px 22px 0}
+.rptit{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.rplist{display:flex;flex-direction:column;gap:7px}
+.rpp{display:flex;align-items:center;gap:10px;background:var(--blue);color:var(--white);border-radius:var(--r);padding:10px 16px}
+.rppi{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rppi svg{width:13px;height:13px}
+.rppt{font-size:12.5px;font-weight:700}
+.rpps{font-size:9.5px;opacity:.7;margin-top:1px}
+/* CLAIM */
+.rcta{padding:16px 22px 20px}
+.btn-claim{
+  width:100%;padding:18px;background:var(--blue);color:var(--white);
+  border:none;border-radius:var(--r);font-family:'Bricolage Grotesque',sans-serif;
+  font-size:17px;font-weight:900;cursor:pointer;transition:var(--t);
+  display:block;margin-bottom:10px;min-height:58px;
+  animation:claimP 2.5s ease infinite;
+}
+@keyframes claimP{0%,100%{box-shadow:0 6px 24px rgba(26,92,255,.4)}50%{box-shadow:0 6px 36px rgba(26,92,255,.7)}}
+.btn-claim:active{background:var(--blue-dk);transform:scale(.98);animation:none}
+.rfine{font-size:10.5px;color:var(--muted);text-align:center;line-height:1.7}
+/* CARD FOOTER */
+.cfoot{padding:10px 22px;border-top:1px solid rgba(0,0,0,.07);display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.4)}
+.cflogo{font-family:'Bricolage Grotesque',sans-serif;font-size:10px;font-weight:800;color:var(--muted)}
+/* TESTIMONIALS */
+.trow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.tc{background:var(--white);border-radius:14px;padding:16px;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 12px rgba(13,26,58,.06)}
+.tcstars{display:flex;gap:3px;margin-bottom:8px}
+.tcstar{width:11px;height:11px;background:var(--blue);border-radius:2px}
+.tq{font-size:11.5px;color:var(--body);line-height:1.55}
+.tau{display:flex;align-items:center;gap:8px;margin-top:10px;padding-top:8px;border-top:1px solid rgba(0,0,0,.07)}
+.tav{width:28px;height:28px;border-radius:7px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:900;color:var(--lime);font-size:12px;flex-shrink:0}
+.tnm{font-size:11px;font-weight:700;color:var(--navy)}
+.tlc{font-size:9.5px;color:var(--muted);margin-top:1px}
+/* SWIPE DOTS */
+.sdrow{display:flex;justify-content:center;align-items:center;gap:5px;padding:12px 22px 16px}
+.sd{width:5px;height:5px;border-radius:50%;background:rgba(0,0,0,.12)}
+.sd.a{background:var(--blue);width:18px;border-radius:100px}
+/* MICRO STRIP */
+.mstrip{background:rgba(200,255,0,.15);border:1px solid rgba(200,255,0,.3);border-radius:8px;padding:8px 12px;display:flex;align-items:center;gap:8px;margin:0 22px 12px}
+.mstrip svg{flex-shrink:0;color:#5A7000}
+.mstxt{font-size:11.5px;font-weight:600;color:#2A4000}
+/* RESPONSIVE */
+@media(max-width:400px){
+  .topbar-r .p:first-child{display:none}
+  .ecv{font-size:28px}
+  .trow{grid-template-columns:1fr}
+}
+@media(min-width:560px){
+  .hero,.qouter,.pzone{padding-left:20px;padding-right:20px}
+}
+/* USER-SELECT */
+.opt,.og{-webkit-user-select:none;user-select:none}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M50 8L56 36L84 24L70 50L94 58L70 66L80 90L50 76L20 90L30 66L6 58L30 50L16 24L44 36Z" fill="#C8FF00"/>
+      </svg>
+    </div>
+    <div>
+      <div class="logo-name">Survey Panel</div>
+      <div class="logo-sub">Canada · Official</div>
+    </div>
+  </div>
+  <div class="topbar-r">
+    <span class="p pg">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>
+      Live
+    </span>
+    <span class="p pn">18+ Canada</span>
+  </div>
+</div>
+
+<!-- URGENCY BAR -->
+<div class="urg">
+  <div class="udot"></div>
+  <span><strong>Flash Week Active</strong> — earn +10% bonus points on every survey this week</span>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-i">
+    <div class="ti"><span class="p pl">$88,949</span>Paid out this month<span class="tsep">·</span></div>
+    <div class="ti"><span class="p pb">500 PTS</span>Free on signup<span class="tsep">·</span></div>
+    <div class="ti"><span class="p pw" style="color:#0D1A3A">Flash Week</span>+10% this week<span class="tsep">·</span></div>
+    <div class="ti"><span class="p pl">100K+</span>Members<span class="tsep">·</span></div>
+    <div class="ti"><span class="p pb">PayPal · Amazon · Starbucks</span><span class="tsep">·</span></div>
+    <div class="ti"><span class="p pl">$88,949</span>Paid out this month<span class="tsep">·</span></div>
+    <div class="ti"><span class="p pb">500 PTS</span>Free on signup<span class="tsep">·</span></div>
+    <div class="ti"><span class="p pw" style="color:#0D1A3A">Flash Week</span>+10% this week<span class="tsep">·</span></div>
+    <div class="ti"><span class="p pl">100K+</span>Members<span class="tsep">·</span></div>
+    <div class="ti"><span class="p pb">PayPal · Amazon · Starbucks</span><span class="tsep">·</span></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero" id="heroSec">
+  <div class="hero-card">
+    <div class="nbadge">00</div>
+    <div class="hero-eye">
+      <span class="p pg">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 2l1.5 3.5L13 6.5l-2.5 2.5.5 3.5L8 11l-3 1.5.5-3.5L3 6.5l3.5-1z"/></svg>
+        60-Second Earning Calculator
+      </span>
+    </div>
+    <h1 class="hero-title">Find Out How Much<br>You Could <span class="hl">Earn</span></h1>
+    <p class="hero-desc">Answer 5 quick questions — get a personalised reward estimate based on your profile.</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-n">$88K</div><div class="stat-l">Month Payouts</div></div>
+      <div class="stat"><div class="stat-n">500</div><div class="stat-l">Free Points</div></div>
+      <div class="stat"><div class="stat-n">100K+</div><div class="stat-l">Members</div></div>
+    </div>
+    <div class="soc">
+      <div class="savs">
+        <div class="sav">J</div><div class="sav">M</div><div class="sav">S</div><div class="sav">A</div>
+      </div>
+      <span>1,247 Canadians joined this week</span>
+    </div>
+    <button class="btn-start" onclick="startQuiz()">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      Calculate My Earnings — Free
+    </button>
+    <p class="hero-fine">No credit card · Free forever · Canadian residents 18+</p>
+    <div class="sdrow" style="padding-top:16px">
+      <div class="sd a"></div><div class="sd"></div><div class="sd"></div><div class="sd"></div><div class="sd"></div>
+    </div>
+  </div>
+  <div class="trow">
+    <div class="tc">
+      <div class="tcstars"><div class="tcstar"></div><div class="tcstar"></div><div class="tcstar"></div><div class="tcstar"></div><div class="tcstar"></div></div>
+      <p class="tq">"Easy cash. Thought-provoking surveys that actually pay. Give it a try!"</p>
+      <div class="tau"><div class="tav">E</div><div><div class="tnm">E.B.</div><div class="tlc">Canada · Verified Member</div></div></div>
+    </div>
+    <div class="tc">
+      <div class="tcstars"><div class="tcstar"></div><div class="tcstar"></div><div class="tcstar"></div><div class="tcstar"></div><div class="tcstar"></div></div>
+      <p class="tq">"Rewards come fast. Completely legitimate — I've cashed out 4 times!"</p>
+      <div class="tau"><div class="tav">G</div><div><div class="tnm">G.H.</div><div class="tlc">Canada · Verified Member</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="pzone" id="progZone" style="display:none">
+  <span class="plbl">Step</span>
+  <div class="ptrack"><div class="pfill" id="progFill" style="width:20%"></div></div>
+  <span class="pstep" id="progStep">1 / 5</span>
+</div>
+
+<!-- QUIZ -->
+<div class="qouter" id="quizOuter" style="display:none">
+  <div class="qcard">
+
+    <!-- Q1 -->
+    <div class="screen on" id="q1">
+      <div class="qh">
+        <div class="qh-top"><span class="qtag">Question 01</span><span class="p pg" style="height:24px;padding:0 10px;font-size:10px">1 of 5</span></div>
+        <div class="qtit">Which province do you call home?</div>
+        <div class="qsub">Survey availability varies by region — this matches you to live studies.</div>
+      </div>
+      <div class="ogrid">
+        <button class="og" onclick="grd(this,'q1')"><div class="ogi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="16" height="11" rx="2"/><path d="M7 7V5a3 3 0 0 1 6 0v2"/></svg></div><div class="ogl">Ontario</div></button>
+        <button class="og" onclick="grd(this,'q1')"><div class="ogi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 3L14 9L10 7L6 9Z"/><path d="M4 9L10 7L16 9L16 17L4 17Z"/></svg></div><div class="ogl">BC</div></button>
+        <button class="og" onclick="grd(this,'q1')"><div class="ogi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="8" r="4"/><path d="M4 18c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg></div><div class="ogl">Alberta</div></button>
+        <button class="og" onclick="grd(this,'q1')"><div class="ogi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17L10 3L17 17Z"/></svg></div><div class="ogl">Quebec</div></button>
+        <button class="og" onclick="grd(this,'q1')"><div class="ogi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12Q10 4 18 12"/><path d="M2 16Q10 8 18 16"/></svg></div><div class="ogl">Prairies</div><div class="ogs">SK / MB</div></button>
+        <button class="og" onclick="grd(this,'q1')"><div class="ogi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12Q10 6 17 12Q10 18 3 12"/></svg></div><div class="ogl">Other</div></button>
+      </div>
+      <div class="cdiv"></div>
+      <div class="qa"><button class="btn-next" id="n1" disabled onclick="nav(2,40)">Continue <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button></div>
+      <div class="cfoot"><div class="cflogo">survey panel canada</div><div><span class="p pg" style="height:20px;padding:0 8px;font-size:9.5px">Step 1</span></div></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="screen" id="q2">
+      <div class="qh">
+        <div class="qh-top"><span class="qtag">Question 02</span><span class="p pg" style="height:24px;padding:0 10px;font-size:10px">2 of 5</span></div>
+        <div class="qtit">What's your age group?</div>
+        <div class="qsub">Different demographics unlock more surveys — more matches, more earnings.</div>
+      </div>
+      <div class="olist">
+        <button class="opt" onclick="lst(this,'q2')"><div class="opp"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 10c-5 0-8 2-8 4v1h16v-1c0-2-3-4-8-4z"/></svg></div><div><span class="ol">18–24</span><span class="od">Student or early career</span></div><div class="ochk"></div></button>
+        <button class="opt" onclick="lst(this,'q2')"><div class="opp"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="14" height="10" rx="2"/><path d="M7 7V5a3 3 0 0 1 6 0v2"/></svg></div><div><span class="ol">25–34</span><span class="od">Building your path</span></div><div class="ochk"></div></button>
+        <button class="opt" onclick="lst(this,'q2')"><div class="opp"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 18v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><circle cx="10" cy="7" r="4"/></svg></div><div><span class="ol">35–49</span><span class="od">Established adult</span></div><div class="ochk"></div></button>
+        <button class="opt" onclick="lst(this,'q2')"><div class="opp"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="6" r="4"/><path d="M4 18c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg></div><div><span class="ol">50–64</span><span class="od">Pre-retirement years</span></div><div class="ochk"></div></button>
+        <button class="opt" onclick="lst(this,'q2')"><div class="opp"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="6" r="4"/><path d="M4 18c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M7 9l3 2 3-2"/></svg></div><div><span class="ol">65+</span><span class="od">Senior member — high demand</span></div><div class="ochk"></div></button>
+      </div>
+      <div class="cdiv"></div>
+      <div class="qa">
+        <button class="btn-next" id="n2" disabled onclick="nav(3,60)">Continue <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+        <button class="btn-back" onclick="bck(1,20)">← Back</button>
+      </div>
+      <div class="cfoot"><div class="cflogo">survey panel canada</div><div><span class="p pg" style="height:20px;padding:0 8px;font-size:9.5px">Step 2</span></div></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="screen" id="q3">
+      <div class="qh">
+        <div class="qh-top"><span class="qtag">Question 03</span><span class="p pg" style="height:24px;padding:0 10px;font-size:10px">3 of 5</span></div>
+        <div class="qtit">Preferred Reward</div>
+        <div class="qsub">We'll prioritise your chosen payout — all options always available.</div>
+      </div>
+      <div class="olist">
+        <button class="opt" onclick="lst(this,'q3')"><div class="opp"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="16" height="12" rx="2"/><path d="M2 9h16"/><path d="M6 14h2M10 14h4"/></svg></div><div><span class="ol">PayPal Cash</span><span class="od">Direct to your account — #1 most popular</span></div><div class="ochk"></div></button>
+        <button class="opt" onclick="lst(this,'q3')"><div class="opp"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h12l-1.5 9H5.5z"/><circle cx="8" cy="16" r="1.5"/><circle cx="13" cy="16" r="1.5"/></svg></div><div><span class="ol">Amazon Gift Cards</span><span class="od">Shop anything on Amazon.ca</span></div><div class="ochk"></div></button>
+        <button class="opt" onclick="lst(this,'q3')"><div class="opp"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 3Q10 2 15 3L16 12Q10 16 4 12Z"/><path d="M8 8Q10 10 12 8"/></svg></div><div><span class="ol">Starbucks Rewards</span><span class="od">Your daily coffee, covered</span></div><div class="ochk"></div></button>
+        <button class="opt" onclick="lst(this,'q3')"><div class="opp"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 3L12 8H17L13 11L14.5 16L10 13L5.5 16L7 11L3 8H8Z"/></svg></div><div><span class="ol">Surprise Me</span><span class="od">Whatever's best for my profile</span></div><div class="ochk"></div></button>
+      </div>
+      <div class="cdiv"></div>
+      <div class="qa">
+        <button class="btn-next" id="n3" disabled onclick="nav(4,80)">Continue <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+        <button class="btn-back" onclick="bck(2,40)">← Back</button>
+      </div>
+      <div class="cfoot"><div class="cflogo">survey panel canada</div><div><span class="p pg" style="height:20px;padding:0 8px;font-size:9.5px">Step 3</span></div></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="screen" id="q4">
+      <div class="qh">
+        <div class="qh-top"><span class="qtag">Question 04</span><span class="p pg" style="height:24px;padding:0 10px;font-size:10px">4 of 5</span></div>
+        <div class="qtit">How often are you online each day?</div>
+        <div class="qsub">Determines how many survey invites you receive weekly.</div>
+      </div>
+      <div class="olist">
+        <button class="opt" onclick="lst(this,'q4')"><div class="opp"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="2" width="10" height="16" rx="2"/><path d="M8 15h4"/></svg></div><div><span class="ol">Always Connected</span><span class="od">Phone in hand all day</span></div><div class="ochk"></div></button>
+        <button class="opt" onclick="lst(this,'q4')"><div class="opp"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="16" height="12" rx="2"/><path d="M6 16v1M14 16v1M5 16h10"/></svg></div><div><span class="ol">Several Times Daily</span><span class="od">Regular online sessions</span></div><div class="ochk"></div></button>
+        <button class="opt" onclick="lst(this,'q4')"><div class="opp"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="7"/><path d="M10 7v3l2 2"/></svg></div><div><span class="ol">Once or Twice Daily</span><span class="od">Morning and evening checks</span></div><div class="ochk"></div></button>
+        <button class="opt" onclick="lst(this,'q4')"><div class="opp"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="16" height="15" rx="2"/><path d="M2 7h16M7 3V1M13 3V1"/></svg></div><div><span class="ol">Few Times a Week</span><span class="od">Occasional online time</span></div><div class="ochk"></div></button>
+      </div>
+      <div class="cdiv"></div>
+      <div class="qa">
+        <button class="btn-next" id="n4" disabled onclick="nav(5,90)">Continue <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+        <button class="btn-back" onclick="bck(3,60)">← Back</button>
+      </div>
+      <div class="cfoot"><div class="cflogo">survey panel canada</div><div><span class="p pg" style="height:20px;padding:0 8px;font-size:9.5px">Step 4</span></div></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="screen" id="q5">
+      <div class="qh">
+        <div class="qh-top"><span class="qtag">Question 05 — Final</span><span class="p pl" style="height:24px;padding:0 10px;font-size:10px;color:#0A0B0F">Last one!</span></div>
+        <div class="qtit">Topics That Interest You</div>
+        <div class="qsub">Select as many as you like — more interests means more matched surveys.</div>
+      </div>
+      <div class="mstrip">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 2l1.5 3.5L13 6.5l-2.5 2.5.5 3.5L8 11l-3 1.5.5-3.5L3 6.5l3.5-1z" fill="rgba(200,255,0,0.4)"/></svg>
+        <span class="mstxt">Selecting 5+ topics unlocks your highest earning tier</span>
+      </div>
+      <div class="ogrid">
+        <button class="og" onclick="multi(this)"><div class="ogi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h12l-1.5 9H5.5z"/><circle cx="8" cy="16" r="1.5"/><circle cx="13" cy="16" r="1.5"/></svg></div><div class="ogl">Shopping</div></button>
+        <button class="og" onclick="multi(this)"><div class="ogi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 3Q16 6 16 12Q16 17 10 17Q4 17 4 12Q4 6 10 3"/><path d="M8 11L10 13L13 9"/></svg></div><div class="ogl">Health</div></button>
+        <button class="og" onclick="multi(this)"><div class="ogi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="7"/><path d="M7 9Q10 12 13 9"/><path d="M8 7h.01M12 7h.01"/></svg></div><div class="ogl">Food</div></button>
+        <button class="og" onclick="multi(this)"><div class="ogi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 9L10 3L16 9V17H4Z"/><path d="M8 17v-5h4v5"/></svg></div><div class="ogl">Politics</div></button>
+        <button class="og" onclick="multi(this)"><div class="ogi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="16" height="12" rx="2"/><path d="M2 9h16M6 14h2"/></svg></div><div class="ogl">Finance</div></button>
+        <button class="og" onclick="multi(this)"><div class="ogi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="16" height="12" rx="2"/><circle cx="10" cy="10" r="3"/></svg></div><div class="ogl">Entertainment</div></button>
+        <button class="og" onclick="multi(this)"><div class="ogi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 18v-5a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v5"/><circle cx="10" cy="5" r="3"/></svg></div><div class="ogl">Home &amp; Family</div></button>
+        <button class="og" onclick="multi(this)"><div class="ogi"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="8" width="18" height="8" rx="3"/><circle cx="5" cy="16" r="2"/><circle cx="15" cy="16" r="2"/><path d="M1 10L4 6H14L19 10"/></svg></div><div class="ogl">Automotive</div></button>
+      </div>
+      <div class="cdiv"></div>
+      <div class="qa">
+        <button class="btn-next" onclick="startLoad()">See My Results <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+        <button class="btn-back" onclick="bck(4,80)">← Back</button>
+      </div>
+      <div class="cfoot"><div class="cflogo">survey panel canada</div><div><span class="p pl" style="height:20px;padding:0 8px;font-size:9.5px;color:#0A0B0F">Final Step</span></div></div>
+    </div>
+
+    <!-- LOADING -->
+    <div class="lscr" id="loadScreen">
+      <div class="lwrap">
+        <div style="text-align:center;margin-bottom:12px"><div class="nbadge" style="margin:0 auto 12px">...</div></div>
+        <div class="ltit">Calculating <span class="hl">Your Profile</span></div>
+        <div class="lsub">Matching you to live surveys across Canada right now</div>
+        <div class="lbw"><div class="lb" id="lBar"></div></div>
+        <div class="lpct" id="lPct">0%</div>
+        <div class="lsteps">
+          <div class="lsrow"><div class="lsico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 3a7 7 0 1 1 0 14A7 7 0 0 1 10 3z"/><circle cx="10" cy="10" r="2"/></svg></div><div class="lstxt">Checking regional survey availability</div><div class="lschk" id="lc1"></div></div>
+          <div class="lsrow"><div class="lsico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="7" r="4"/><path d="M4 18c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg></div><div class="lstxt">Matching profile to active studies</div><div class="lschk" id="lc2"></div></div>
+          <div class="lsrow"><div class="lsico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="16" height="12" rx="2"/><path d="M2 9h16M6 14h2"/></svg></div><div class="lstxt">Calculating earning potential</div><div class="lschk" id="lc3"></div></div>
+          <div class="lsrow"><div class="lsico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 3L12 8H17L13 11L14.5 16L10 13L5.5 16L7 11L3 8H8Z"/></svg></div><div class="lstxt">Preparing personalised reward offer</div><div class="lschk" id="lc4"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="rscr" id="resScreen">
+      <div class="rhead">
+        <div class="reye">Great news — you qualify for</div>
+        <div class="rtier" id="rTier">Premium Member</div>
+        <div class="rerow">
+          <div class="ec"><div class="ecl">MONTHLY MIN</div><div class="ecv"><sup>$</sup><span id="rMin">45</span></div><div class="ecs">estimated</div></div>
+          <div class="ec"><div class="ecl">MONTHLY MAX</div><div class="ecv"><sup>$</sup><span id="rMax">120</span></div><div class="ecs">estimated</div></div>
+        </div>
+      </div>
+      <div class="rstats">
+        <div class="rst"><div class="rstn" id="rSurv">52</div><div class="rstl">Surveys Ready</div></div>
+        <div class="rst"><div class="rstn">500</div><div class="rstl">Free Pts on Join</div></div>
+        <div class="rst"><div class="rstn" style="color:var(--navy)">Free</div><div class="rstl">Always Free</div></div>
+      </div>
+      <div class="soc" style="padding:12px 22px 0">
+        <div class="savs"><div class="sav">J</div><div class="sav">M</div><div class="sav">S</div><div class="sav">A</div></div>
+        <span>847 people claimed this offer today</span>
+      </div>
+      <div class="rperks">
+        <div class="rptit">What you get</div>
+        <div class="rplist">
+          <div class="rpp"><div class="rppi"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="14" height="10" rx="2"/><path d="M1 7h14M5 11h2"/></svg></div><div><div class="rppt">500 Points Instantly on Sign-Up</div><div class="rpps">Credited the moment you verify your email</div></div></div>
+          <div class="rpp"><div class="rppi"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3h10l-1 8H4z"/><circle cx="6" cy="13" r="1.5"/><circle cx="11" cy="13" r="1.5"/></svg></div><div><div class="rppt">PayPal, Amazon &amp; Starbucks Payouts</div><div class="rpps">Redeem at your preferred threshold</div></div></div>
+          <div class="rpp"><div class="rppi"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 2L9.5 6H14L10.5 8.5L12 12L8 10L4 12L5.5 8.5L2 6H6.5Z"/></svg></div><div><div class="rppt">Flash Week — 10% Bonus Points</div><div class="rpps">Extra on every survey completed this week</div></div></div>
+        </div>
+      </div>
+      <div class="rcta">
+        <button class="btn-claim" onclick="handleClaim()">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" style="display:inline;vertical-align:middle;margin-right:6px"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          Claim Free Account — Get 500 Points
+        </button>
+        <p class="rfine">Canadian residents 18+ · No credit card · No spam · Double opt-in verified</p>
+      </div>
+      <div class="sdrow"><div class="sd"></div><div class="sd"></div><div class="sd"></div><div class="sd"></div><div class="sd a"></div></div>
+      <div class="cfoot">
+        <div class="cflogo">survey panel canada</div>
+        <div><span class="p pn" style="height:20px;padding:0 8px;font-size:9.5px">
+          <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2a6 6 0 1 1 0 12A6 6 0 0 1 8 2z"/><path d="M6 8l2 2 4-4"/></svg>
+          Complete
+        </span></div>
+      </div>
+    </div>
+
+  </div><!-- /qcard -->
+
+  <!-- Testimonials -->
+  <div class="trow">
+    <div class="tc">
+      <div class="tcstars"><div class="tcstar"></div><div class="tcstar"></div><div class="tcstar"></div><div class="tcstar"></div><div class="tcstar"></div></div>
+      <p class="tq">"Great easy way to earn quick cash. Surveys that actually pay. Give it a try!"</p>
+      <div class="tau"><div class="tav">E</div><div><div class="tnm">E.B.</div><div class="tlc">Canada · Verified Member</div></div></div>
+    </div>
+    <div class="tc">
+      <div class="tcstars"><div class="tcstar"></div><div class="tcstar"></div><div class="tcstar"></div><div class="tcstar"></div><div class="tcstar"></div></div>
+      <p class="tq">"Makes me feel part of a community. Rewards come quickly. Completely legit!"</p>
+      <div class="tau"><div class="tav">G</div><div><div class="tnm">G.H.</div><div class="tlc">Canada · Verified Member</div></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+let mArr=[];
+
+function startQuiz(){
+  document.getElementById('heroSec').style.display='none';
+  document.getElementById('progZone').style.display='flex';
+  document.getElementById('quizOuter').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function grd(btn,qId){
+  btn.closest('.ogrid').querySelectorAll('.og').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  const n=document.getElementById('n'+qId.replace('q',''));
+  if(n)n.disabled=false;
+  if(navigator.vibrate)navigator.vibrate(8);
+}
+
+function lst(btn,qId){
+  btn.closest('.olist').querySelectorAll('.opt').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  const n=document.getElementById('n'+qId.replace('q',''));
+  if(n)n.disabled=false;
+  if(navigator.vibrate)navigator.vibrate(8);
+}
+
+function multi(btn){
+  btn.classList.toggle('sel');
+  const l=btn.querySelector('.ogl').textContent;
+  if(btn.classList.contains('sel')){if(!mArr.includes(l))mArr.push(l);}
+  else{mArr=mArr.filter(x=>x!==l);}
+  if(navigator.vibrate)navigator.vibrate(6);
+}
+
+function nav(next,pct){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  document.getElementById('q'+next).classList.add('on');
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('progStep').textContent=next+' / 5';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function bck(prev,pct){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  document.getElementById('q'+prev).classList.add('on');
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('progStep').textContent=prev+' / 5';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function startLoad(){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  document.getElementById('progFill').style.width='100%';
+  document.getElementById('progStep').textContent='Calculating…';
+  document.getElementById('loadScreen').classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(()=>{document.getElementById('lBar').style.width='100%';},80);
+  let p=0;
+  const pi=setInterval(()=>{
+    p=Math.min(p+1,100);
+    document.getElementById('lPct').textContent=p+'%';
+    if(p>=100)clearInterval(pi);
+  },34);
+  ['lc1','lc2','lc3','lc4'].forEach((id,i)=>{
+    setTimeout(()=>{const e=document.getElementById(id);e.textContent='✓';e.classList.add('done');},700+i*700);
+  });
+  setTimeout(showResult,4200);
+}
+
+function showResult(){
+  document.getElementById('loadScreen').classList.remove('on');
+  document.getElementById('resScreen').classList.add('on');
+  document.getElementById('progStep').textContent='Done';
+  window.scrollTo({top:0,behavior:'smooth'});
+  const ageEl=document.querySelector('#q2 .opt.sel .ol');
+  const age=ageEl?ageEl.textContent:'35–49';
+  let min=40,max=100,surv=48,tier='Standard Member';
+  if(age.includes('18')){min=28;max=70;surv=36;tier='Active Member';}
+  else if(age.includes('25')){min=38;max=90;surv=44;tier='Active Member';}
+  else if(age.includes('35')){min=50;max=125;surv=58;tier='Premium Member';}
+  else if(age.includes('50')){min=54;max=135;surv=65;tier='Senior Premium';}
+  else if(age.includes('65')){min=50;max=118;surv=61;tier='Senior Member';}
+  if(mArr.length>=5){min+=10;max+=20;surv+=8;}
+  document.getElementById('rTier').textContent=tier;
+  cu('rMin',0,min,1100);cu('rMax',0,max,1300);cu('rSurv',0,surv,950);
+}
+
+function cu(id,from,to,dur){
+  const el=document.getElementById(id),t0=performance.now();
+  (function tick(now){
+    const p=Math.min((now-t0)/dur,1),e=1-Math.pow(1-p,3);
+    el.textContent=Math.round(from+(to-from)*e);
+    if(p<1)requestAnimationFrame(tick);
+  })(performance.now());
+}
+
+function handleClaim(){
+  // Replace with your registration URL:
+  // window.location.href='https://your-signup-url.com';
+  console.log('CTA clicked — wire up registration URL here');
+}
+</script>
+</body>
+</html>
